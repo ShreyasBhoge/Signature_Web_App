@@ -9,11 +9,13 @@ function SignPage() {
   const [pdfUrl, setPdfUrl] = useState(null);
   const [error, setError] = useState(null);
 
+  const API_BASE = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const verifyAndFetch = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/api/public/verify", { token });
-        setPdfUrl(`/uploads/${res.data.filename}`);
+        const res = await axios.post(`${API_BASE}/api/public/verify`, { token });
+        setPdfUrl(`${API_BASE}/uploads/${res.data.filename}`);
       } catch (err) {
         console.error("Link verify error:", err.message);
         setError("⚠️ Invalid or expired signature link.");
@@ -21,7 +23,7 @@ function SignPage() {
     };
 
     verifyAndFetch();
-  }, [token]);
+  }, [token, API_BASE]);
 
   return (
     <div className="p-4">
