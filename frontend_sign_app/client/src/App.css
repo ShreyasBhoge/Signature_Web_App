@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🎨 Smooth rainbow gradient animation */
+@keyframes rainbowFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-rainbow {
+  background: linear-gradient(-45deg, #ff4d4d, #ffa64d, #ffff4d, #4dff88, #4dd2ff, #b84dff, #ff4da6);
+  background-size: 400% 400%;
+  animation: rainbowFlow 12s ease infinite;
+}

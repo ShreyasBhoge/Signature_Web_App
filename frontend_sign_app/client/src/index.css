@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌈 Smooth rainbow background animation */
+@keyframes rainbowFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-rainbow {
+  background: linear-gradient(-45deg, #ff4d4d, #ffa64d, #ffff4d, #4dff88, #4dd2ff, #b84dff, #ff4da6);
+  background-size: 400% 400%;
+  animation: rainbowFlow 10s ease infinite;
+}
+
+/* ✨ Optional fade-in effect */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-in-out;
+}
