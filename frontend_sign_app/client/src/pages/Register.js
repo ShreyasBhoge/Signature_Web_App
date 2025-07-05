@@ -12,13 +12,15 @@ const Register = () => {
     password: "",
   });
 
+  const API_BASE = process.env.REACT_APP_API_URL;
+
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/register", form);
+      await axios.post(`${API_BASE}/api/auth/register`, form);
       toast.success("✅ Registered successfully!");
       navigate("/login");
     } catch (err) {
