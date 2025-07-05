@@ -15,6 +15,8 @@ const DocumentList = () => {
   const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
 
+  const API_BASE = process.env.REACT_APP_API_URL;
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -30,7 +32,7 @@ const DocumentList = () => {
           return;
         }
 
-        const res = await axios.get("http://localhost:5000/api/documents", {
+        const res = await axios.get(`${API_BASE}/api/documents`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -45,12 +47,12 @@ const DocumentList = () => {
     };
 
     fetchDocuments();
-  }, []);
+  }, [API_BASE]);
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
     try {
-      await axios.delete(`http://localhost:5000/api/documents/${id}`, {
+      await axios.delete(`${API_BASE}/api/documents/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDocuments((prev) => prev.filter((doc) => doc._id !== id));
@@ -61,7 +63,7 @@ const DocumentList = () => {
   };
 
   const handleCopyLink = (filename) => {
-    const url = `http://localhost:5000/uploads/signed-${filename}`;
+    const url = `${API_BASE}/uploads/signed-${filename}`;
     navigator.clipboard.writeText(url);
     alert("✅ Link copied to clipboard:\n" + url);
   };
@@ -80,7 +82,7 @@ const DocumentList = () => {
       setUploading(true);
       const token = localStorage.getItem("token");
 
-      await axios.post("http://localhost:5000/api/documents/upload", formData, {
+      await axios.post(`${API_BASE}/api/documents/upload`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -114,12 +116,11 @@ const DocumentList = () => {
 
   return (
     <>
-    <Navbar
-  onLogout={handleLogout}
-  filterStatus={filterStatus}
-  setFilterStatus={setFilterStatus}
-/>
-
+      <Navbar
+        onLogout={handleLogout}
+        filterStatus={filterStatus}
+        setFilterStatus={setFilterStatus}
+      />
 
       <div className="p-4 max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold mb-8 text-center text-blue-700">
@@ -171,7 +172,10 @@ const DocumentList = () => {
                     className="bg-white w-full max-w-xl mx-auto min-h-[180px] rounded-xl shadow-md border border-gray-200 p-8 transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-blue-400 relative"
                   >
                     <div className="mb-4">
-                      <h4 className="font-semibold truncate text-lg text-gray-800" title={doc.originalname}>
+                      <h4
+                        className="font-semibold truncate text-lg text-gray-800"
+                        title={doc.originalname}
+                      >
                         {doc.originalname}
                       </h4>
                       <p className="text-sm text-gray-500">
@@ -179,7 +183,11 @@ const DocumentList = () => {
                       </p>
                       <p className="text-sm mt-1 flex items-center gap-2">
                         <span className="font-semibold">Status:</span>
-                        <span className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(doc.status)}`}>
+                        <span
+                          className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(
+                            doc.status
+                          )}`}
+                        >
                           {doc.status || "Pending"}
                         </span>
                         {doc.status === "Rejected" && doc.rejectionReason && (
@@ -197,7 +205,7 @@ const DocumentList = () => {
                         View
                       </Link>
                       <a
-                        href={`http://localhost:5000/uploads/signed-${doc.filename}`}
+                        href={`${API_BASE}/uploads/signed-${doc.filename}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
