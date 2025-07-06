@@ -26,10 +26,14 @@ function SignPage() {
   }, [token, API_BASE]);
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Public Signature Page</h2>
+    <div className="p-4 max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold mb-4 text-blue-700">🖋️ Public Signature Page</h2>
 
       {error && <p className="text-red-600">{error}</p>}
+
+      {!error && !pdfUrl && (
+        <p className="text-gray-500 animate-pulse">Loading PDF...</p>
+      )}
 
       {!error && pdfUrl && (
         <div className="border shadow rounded">
