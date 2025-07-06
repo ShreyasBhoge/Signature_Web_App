@@ -12,13 +12,13 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="bg-gradient-to-tr from-blue-50 via-white to-blue-100 border-t border-blue-200 mt-0 text-sm text-gray-700"
+      className="bg-gradient-to-tr from-blue-50 via-white to-blue-100 border-t border-blue-200 text-sm text-gray-700"
     >
-      <div className="max-w-6xl mx-auto px-6 py-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3 animate-fade-in">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {/* 📞 Contact Info */}
         <div>
           <h4 className="text-lg font-bold mb-4 text-gray-800">📞 Contact Us</h4>
-          <ul className="space-y-3">
+          <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2 hover:text-blue-600 transition">
               <Mail size={16} /> support@signpro.com
             </li>
@@ -42,7 +42,7 @@ const Footer = () => {
         {/* 🌐 Social Links */}
         <div>
           <h4 className="text-lg font-bold mb-4 text-gray-800">🌐 Connect with us</h4>
-          <ul className="space-y-3">
+          <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2 hover:text-pink-500 transition">
               <Instagram size={16} />
               <a
@@ -54,7 +54,7 @@ const Footer = () => {
                 Instagram
               </a>
             </li>
-            <li className="flex items-center gap-2 hover:text-blue-400 transition">
+            <li className="flex items-center gap-2 hover:text-blue-500 transition">
               <Send size={16} />
               <a
                 href="https://t.me/Shreyas_011"
@@ -79,10 +79,10 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* 📝 About / Branding */}
-        <div className="md:col-span-2 lg:col-span-1">
-          <h4 className="text-lg font-bold mb-4 text-gray-800"> About SignPro</h4>
-          <p className="text-gray-600 leading-relaxed">
+        {/* 📝 About Section */}
+        <div className="sm:col-span-2 lg:col-span-1">
+          <h4 className="text-lg font-bold mb-4 text-gray-800">📝 About SignPro</h4>
+          <p className="text-gray-600 text-sm leading-relaxed">
             SignPro makes document signing seamless and secure with real-time tracking,
             audit logging, and tokenized access. Whether you're remote or in-office,
             it brings the power of simplicity to your workflow. 🚀
@@ -90,9 +90,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-center py-5 text-xs text-gray-500 border-t border-blue-200">
+      <div className="text-center py-5 text-xs text-gray-500 border-t border-blue-200 px-4">
         © {new Date().getFullYear()}{" "}
-        <span className="font-semibold text-gray-700">SignPro</span>. All rights reserved by SHREYAS
+        <span className="font-semibold text-gray-700">SignPro</span>. All rights reserved by SHREYAS.
       </div>
     </footer>
   );
