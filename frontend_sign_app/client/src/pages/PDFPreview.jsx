@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const PDFPreview = () => {
   const { filename } = useParams();
   const navigate = useNavigate();
+  const API_BASE = process.env.REACT_APP_API_URL;
 
   const [docId, setDocId] = useState(null);
   const [signatureText, setSignatureText] = useState("Alice Smith");
@@ -20,7 +21,7 @@ const PDFPreview = () => {
   useEffect(() => {
     const fetchDocument = async () => {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/documents", {
+      const res = await axios.get(`${API_BASE}/api/documents`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -33,7 +34,7 @@ const PDFPreview = () => {
       }
     };
     fetchDocument();
-  }, [filename]);
+  }, [filename, API_BASE]);
 
   useEffect(() => {
     const handleWindowMouseMove = (e) => {
@@ -68,7 +69,7 @@ const PDFPreview = () => {
     if (!docId || !signaturePos) return toast.error("❌ Missing data");
     try {
       await axios.post(
-        `http://localhost:5000/api/documents/${docId}/sign`,
+        `${API_BASE}/api/documents/${docId}/sign`,
         { x: signaturePos.x, y: signaturePos.y },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -88,7 +89,7 @@ const PDFPreview = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/documents/finalize",
+        `${API_BASE}/api/documents/finalize`,
         {
           filename,
           documentId: docId,
@@ -119,7 +120,7 @@ const PDFPreview = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/documents/${docId}/reject`,
+        `${API_BASE}/api/documents/${docId}/reject`,
         { reason },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -134,7 +135,6 @@ const PDFPreview = () => {
     <div className="min-h-screen bg-white p-6">
       <ToastContainer position="top-center" />
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Header */}
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold text-blue-600">📝 Sign Document</h1>
           <div className="flex gap-2">
@@ -149,7 +149,6 @@ const PDFPreview = () => {
           </div>
         </div>
 
-        {/* Inputs */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <input value={signatureText} onChange={(e) => setSignatureText(e.target.value)} placeholder="Signature" className="input" />
           <select value={font} onChange={(e) => setFont(e.target.value)} className="input">
@@ -163,7 +162,7 @@ const PDFPreview = () => {
         {/* PDF Viewer */}
         <div id="pdf-container" className="relative h-[700px] border rounded shadow bg-gray-100 overflow-hidden">
           <iframe
-            src={`http://localhost:5000/uploads/${filename}`}
+            src={`${API_BASE}/uploads/${filename}`}
             title="PDF Viewer"
             width="100%"
             height="700px"
@@ -192,7 +191,7 @@ const PDFPreview = () => {
         {finalizedPath && (
           <div className="flex justify-end">
             <a
-              href={`http://localhost:5000/uploads/${finalizedPath}?t=${Date.now()}`}
+              href={`${API_BASE}/uploads/${finalizedPath}?t=${Date.now()}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn bg-purple-100 text-purple-800"
@@ -203,7 +202,6 @@ const PDFPreview = () => {
         )}
       </div>
 
-      {/* Tailwind Helpers */}
       <style>{`
         .btn {
           padding: 0.5rem 1rem;
