@@ -30,9 +30,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex items-center justify-center relative px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex items-center justify-center px-4 py-10 relative">
       {/* Sign Up Link */}
-      <div className="absolute top-6 right-6 z-10">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
         <Link
           to="/register"
           className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium shadow"
@@ -41,16 +41,18 @@ const Login = () => {
         </Link>
       </div>
 
-      {/* Animated Login Card */}
+      {/* Login Card */}
       <motion.div
-        className="relative z-10 bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl shadow-xl p-8 w-full max-w-md"
+        className="w-full max-w-md bg-white/90 backdrop-blur-md border border-gray-200 rounded-2xl shadow-xl p-6 sm:p-8 relative z-10"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="text-center mb-6">
-          <div className="text-5xl mb-2">🔐</div>
-          <h1 className="text-3xl font-extrabold text-gray-800">Welcome Back</h1>
+          <div className="text-4xl sm:text-5xl mb-2">🔐</div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-800">
+            Welcome Back
+          </h1>
           <p className="text-sm text-gray-500 mt-1">Login to SignPro</p>
         </div>
 
@@ -81,7 +83,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full py-2 font-semibold rounded-lg bg-indigo-600 text-white hover:scale-105 transition-all duration-300 shadow-md"
+            className="w-full py-2 font-semibold rounded-lg bg-indigo-600 text-white hover:scale-105 transition-all duration-300 shadow-md text-base sm:text-lg"
           >
             🚀 Log In
           </button>
