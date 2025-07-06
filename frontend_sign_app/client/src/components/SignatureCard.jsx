@@ -1,10 +1,9 @@
-// src/components/SignatureCard.jsx
 import React from "react";
 
 const SignatureCard = ({ name, face, signature }) => {
   return (
-    <div className="flex flex-col items-center text-center relative group">
-      {/* Face image floating above */}
+    <div className="flex flex-col items-center text-center relative group w-full max-w-xs mx-auto">
+      {/* Face image */}
       <div className="z-10">
         <img
           src={face}
@@ -18,7 +17,7 @@ const SignatureCard = ({ name, face, signature }) => {
       </div>
 
       {/* Signature card */}
-      <div className="bg-white mt-[-48px] p-8 pt-12 rounded-2xl shadow-lg w-80 transform group-hover:scale-105 transition duration-300 rotate-[-1deg] hover:rotate-0">
+      <div className="bg-white mt-[-48px] p-6 pt-12 rounded-2xl shadow-lg w-full max-w-xs transform group-hover:scale-105 transition duration-300 rotate-[-1deg] hover:rotate-0">
         {/* Grey background lines */}
         <div className="h-4 w-3/4 bg-gray-200 rounded-full mb-2 mx-auto"></div>
         <div className="h-4 w-5/6 bg-gray-200 rounded-full mb-2 mx-auto"></div>
@@ -26,7 +25,7 @@ const SignatureCard = ({ name, face, signature }) => {
         <img
           src={signature}
           alt={`${name} signature`}
-          className="w-full h-24 object-contain mt-2 transition-transform group-hover:scale-105"
+          className="w-full h-20 sm:h-24 object-contain mt-2 transition-transform group-hover:scale-105"
           onError={(e) => {
             e.target.src = "/images/fallback.png";
             e.target.alt = "Signature not found";
@@ -36,7 +35,7 @@ const SignatureCard = ({ name, face, signature }) => {
         <div className="h-0.5 w-1/2 bg-cyan-500 mx-auto mt-3" />
       </div>
 
-      <p className="mt-4 text-gray-800 font-semibold text-lg">{name}</p>
+      <p className="mt-4 text-gray-800 font-semibold text-base sm:text-lg">{name}</p>
     </div>
   );
 };
