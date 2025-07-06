@@ -23,27 +23,29 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section id="info" className="bg-gray-50 py-20 border-t border-gray-200">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-4">
+    <section id="info" className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-200">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-4">
           Why People Love <span className="text-blue-600">SignPro 💼</span>
         </h2>
-        <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto text-sm sm:text-base">
           Power-packed features to make digital signing effortless, professional, and secure.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="flex items-start gap-4 p-6 bg-white backdrop-blur-sm border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition duration-300 group"
+              className="flex items-start gap-4 p-5 sm:p-6 bg-white backdrop-blur-sm border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition duration-300 group"
             >
               <CheckCircle className="text-green-500 w-6 h-6 mt-1 group-hover:scale-110 transition" />
               <div>
-                <h3 className="font-semibold text-lg text-gray-800 group-hover:text-blue-600 transition">
+                <h3 className="font-semibold text-base sm:text-lg text-gray-800 group-hover:text-blue-600 transition">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 mt-1">{feature.description}</p>
+                <p className="text-gray-600 mt-1 text-sm sm:text-base">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}
