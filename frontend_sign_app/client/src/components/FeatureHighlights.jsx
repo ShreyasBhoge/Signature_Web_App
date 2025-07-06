@@ -27,16 +27,16 @@ const features = [
 
 const FeatureHighlights = () => {
   return (
-    <section className="bg-gradient-to-br from-white to-gray-50 py-20 px-6">
+    <section className="bg-gradient-to-br from-white to-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-6">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
           🚀 Why Choose <span className="text-gray-900">SignPro?</span>
         </h2>
-        <p className="text-gray-600 mb-12">
+        <p className="text-gray-600 mb-12 text-sm sm:text-base">
           Powerful features that elevate your document workflow
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {features.map((f, i) => (
             <div
               key={i}
