@@ -26,17 +26,23 @@ function SignPage() {
   }, [token, API_BASE]);
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-blue-700">🖋️ Public Signature Page</h2>
+    <div className="min-h-screen bg-gray-50 px-4 py-10 flex flex-col items-center">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 text-center">
+        🖋️ Public Signature Page
+      </h2>
 
-      {error && <p className="text-red-600">{error}</p>}
+      {error && (
+        <p className="text-red-600 text-center text-base sm:text-lg max-w-md">
+          {error}
+        </p>
+      )}
 
       {!error && !pdfUrl && (
-        <p className="text-gray-500 animate-pulse">Loading PDF...</p>
+        <p className="text-gray-500 animate-pulse text-center">Loading PDF...</p>
       )}
 
       {!error && pdfUrl && (
-        <div className="border shadow rounded">
+        <div className="w-full max-w-5xl border rounded shadow bg-white overflow-auto">
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
             <Viewer fileUrl={pdfUrl} />
           </Worker>
