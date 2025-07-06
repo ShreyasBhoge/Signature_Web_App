@@ -6,15 +6,15 @@ const SignatureShowcase = () => {
   return (
     <section
       id="famous"
-      style={{ margin: 0, padding: "3rem 1.5rem 1rem 1.5rem" }}
-      className="bg-gray-50 border-t border-gray-200"
+      className="bg-gray-50 border-t border-gray-200 px-4 sm:px-6 py-12"
     >
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2">
         ✒️ Famous Signatures
       </h2>
-      <p className="text-center text-gray-500 mb-4">
+      <p className="text-center text-gray-500 mb-6 text-sm sm:text-base">
         Explore iconic digital signatures of famous personalities
       </p>
+
       <div className="max-w-7xl mx-auto">
         <CelebritySignatures />
       </div>
