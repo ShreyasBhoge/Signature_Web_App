@@ -11,11 +11,13 @@ const UploadedDocuments = () => {
   const [filterStatus, setFilterStatus] = useState("All");
   const navigate = useNavigate();
 
+  const API_BASE = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchDocs = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/documents", {
+        const res = await axios.get(`${API_BASE}/api/documents`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setDocuments(res.data);
@@ -28,7 +30,7 @@ const UploadedDocuments = () => {
     };
 
     fetchDocs();
-  }, []);
+  }, [API_BASE]);
 
   const getStatusColor = (status) => {
     return status === "Signed"
@@ -39,7 +41,7 @@ const UploadedDocuments = () => {
   };
 
   const handleCopyLink = (filename) => {
-    const url = `http://localhost:5000/uploads/signed-${filename}`;
+    const url = `${API_BASE}/uploads/signed-${filename}`;
     navigator.clipboard.writeText(url);
     alert("✅ Link copied to clipboard:\n" + url);
   };
@@ -47,7 +49,7 @@ const UploadedDocuments = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/documents/${id}`, {
+      await axios.delete(`${API_BASE}/api/documents/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDocuments((prev) => prev.filter((doc) => doc._id !== id));
@@ -106,7 +108,10 @@ const UploadedDocuments = () => {
                   className="bg-white w-full max-w-xl mx-auto min-h-[180px] rounded-xl shadow-md border border-gray-200 p-8 transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-blue-400 relative"
                 >
                   <div className="mb-4">
-                    <h4 className="font-semibold truncate text-lg text-gray-800" title={doc.originalname}>
+                    <h4
+                      className="font-semibold truncate text-lg text-gray-800"
+                      title={doc.originalname}
+                    >
                       {doc.originalname}
                     </h4>
                     <p className="text-sm text-gray-500">
@@ -114,7 +119,11 @@ const UploadedDocuments = () => {
                     </p>
                     <p className="text-sm mt-1 flex items-center gap-2">
                       <span className="font-semibold">Status:</span>
-                      <span className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(doc.status)}`}>
+                      <span
+                        className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(
+                          doc.status
+                        )}`}
+                      >
                         {doc.status || "Pending"}
                       </span>
                       {doc.status === "Rejected" && doc.rejectionReason && (
@@ -133,7 +142,7 @@ const UploadedDocuments = () => {
                       View
                     </Link>
                     <a
-                      href={`http://localhost:5000/uploads/signed-${doc.filename}`}
+                      href={`${API_BASE}/uploads/signed-${doc.filename}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
