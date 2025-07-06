@@ -15,12 +15,12 @@ const PublicSignPage = () => {
   const [signed, setSigned] = useState(false);
   const [numPages, setNumPages] = useState(null);
   const [coords, setCoords] = useState({ x: 100, y: 100 });
-
   const pdfWrapperRef = useRef(null);
+  const API_BASE = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios
-      .get(`/api/sign/${token}`)
+      .get(`${API_BASE}/api/sign/${token}`)
       .then((res) => {
         console.log("📄 Document data:", res.data);
         setDocData(res.data);
@@ -29,11 +29,11 @@ const PublicSignPage = () => {
         console.error("❌ Error fetching document:", err.message);
         alert("⚠️ Invalid or expired link");
       });
-  }, [token]);
+  }, [token, API_BASE]);
 
   const handleFinalize = async () => {
     try {
-      await axios.post("/api/signatures/public-sign/finalize", {
+      await axios.post(`${API_BASE}/api/signatures/public-sign/finalize`, {
         token,
         name: signature,
         font,
@@ -67,7 +67,7 @@ const PublicSignPage = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-          onClick={() => window.location.href = "/"}
+          onClick={() => (window.location.href = "/")}
         >
           Return Home
         </motion.button>
@@ -93,15 +93,11 @@ const PublicSignPage = () => {
         transition={{ type: "spring", stiffness: 200 }}
       >
         <Document
-          file={`http://localhost:5000/uploads/${docData.filename}`}
+          file={`${API_BASE}/uploads/${docData.filename}`}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
         >
           {Array.from(new Array(numPages), (_, index) => (
-            <Page
-              key={`page_${index + 1}`}
-              pageNumber={index + 1}
-              width={800}
-            />
+            <Page key={`page_${index + 1}`} pageNumber={index + 1} width={800} />
           ))}
         </Document>
 
@@ -110,7 +106,12 @@ const PublicSignPage = () => {
           drag
           dragConstraints={pdfWrapperRef}
           className="absolute px-3 py-1 text-black bg-white rounded border border-blue-400 cursor-move shadow-md"
-          style={{ fontFamily: font, fontSize: "22px", top: coords.y, left: coords.x }}
+          style={{
+            fontFamily: font,
+            fontSize: "22px",
+            top: coords.y,
+            left: coords.x,
+          }}
           onDragEnd={(event, info) => {
             const boundingBox = pdfWrapperRef.current?.getBoundingClientRect();
             if (boundingBox) {
