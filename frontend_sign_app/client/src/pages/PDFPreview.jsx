@@ -24,7 +24,6 @@ const PDFPreview = () => {
       const res = await axios.get(`${API_BASE}/api/documents`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       const doc = res.data.find((d) => d.filename === filename);
       if (doc) {
         setDocId(doc._id);
@@ -132,12 +131,13 @@ const PDFPreview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-6">
+    <div className="min-h-screen bg-white px-4 py-6">
       <ToastContainer position="top-center" />
       <div className="max-w-6xl mx-auto space-y-6">
-        <div className="flex justify-between items-center">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <h1 className="text-xl font-bold text-blue-600">📝 Sign Document</h1>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button onClick={() => navigate("/dashboard")} className="btn">← Back</button>
             {signaturePos && (
               <>
@@ -149,7 +149,8 @@ const PDFPreview = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Inputs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <input value={signatureText} onChange={(e) => setSignatureText(e.target.value)} placeholder="Signature" className="input" />
           <select value={font} onChange={(e) => setFont(e.target.value)} className="input">
             <option value="Courier">Courier</option>
@@ -160,13 +161,13 @@ const PDFPreview = () => {
         </div>
 
         {/* PDF Viewer */}
-        <div id="pdf-container" className="relative h-[700px] border rounded shadow bg-gray-100 overflow-hidden">
+        <div id="pdf-container" className="relative h-[80vh] border rounded shadow bg-gray-100 overflow-hidden">
           <iframe
             src={`${API_BASE}/uploads/${filename}`}
             title="PDF Viewer"
             width="100%"
-            height="700px"
-            className="w-full rounded"
+            height="100%"
+            className="w-full h-full rounded"
           />
           {signaturePos && (
             <div
@@ -187,7 +188,7 @@ const PDFPreview = () => {
           )}
         </div>
 
-        {/* Final PDF View Link */}
+        {/* Final PDF Link */}
         {finalizedPath && (
           <div className="flex justify-end">
             <a
@@ -202,6 +203,7 @@ const PDFPreview = () => {
         )}
       </div>
 
+      {/* Styles */}
       <style>{`
         .btn {
           padding: 0.5rem 1rem;
@@ -219,6 +221,7 @@ const PDFPreview = () => {
           border: 1px solid #ccc;
           border-radius: 0.375rem;
           font-size: 0.875rem;
+          width: 100%;
         }
       `}</style>
     </div>
