@@ -30,12 +30,12 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex items-center justify-center px-4 relative">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex items-center justify-center px-4 py-8 sm:py-16 relative">
       {/* Login Link */}
-      <div className="absolute top-6 right-6 z-10">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
         <Link
           to="/login"
-          className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium shadow"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium shadow transition-all"
         >
           Log In
         </Link>
@@ -43,7 +43,7 @@ const Register = () => {
 
       {/* Registration Card */}
       <motion.div
-        className="relative z-10 bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl shadow-xl p-8 w-full max-w-md"
+        className="relative z-10 w-full max-w-md bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl shadow-xl p-6 sm:p-8"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
