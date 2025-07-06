@@ -7,9 +7,9 @@ const Landing = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] flex flex-col items-center justify-center px-4 py-10 text-center">
       <motion.h1
-        className="text-5xl sm:text-6xl font-extrabold text-center mb-8"
+        className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-10 leading-snug"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -33,20 +33,20 @@ const Landing = () => {
       </motion.h1>
 
       <motion.div
-        className="flex gap-6"
+        className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-xs sm:max-w-none justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
       >
         <button
           onClick={() => navigate("/login")}
-          className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold text-lg hover:scale-105 transition"
+          className="w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold text-base sm:text-lg hover:scale-105 transition"
         >
           Login
         </button>
         <button
           onClick={() => navigate("/register")}
-          className="px-6 py-3 bg-purple-600 text-white rounded-xl font-semibold text-lg hover:scale-105 transition"
+          className="w-full sm:w-auto px-6 py-3 bg-purple-600 text-white rounded-xl font-semibold text-base sm:text-lg hover:scale-105 transition"
         >
           Register
         </button>
