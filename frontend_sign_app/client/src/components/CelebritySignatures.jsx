@@ -35,19 +35,19 @@ const celebrities = [
   },
   {
     name: "Kanye West",
-    face: "/images/kanye-west.gif", // Consider renaming to remove dash
+    face: "/images/kanye-west.gif",
     signature: "/images/kanye-west-signature.svg",
   },
   {
     name: "Neil Armstrong",
-    face: "/images/neil-armstrong.gif", // Consider renaming to remove dash
+    face: "/images/neil-armstrong.gif",
     signature: "/images/neil-armstrong-signature.svg",
   },
 ];
 
 const CelebritySignatures = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 justify-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center px-4 sm:px-6 lg:px-12 py-6">
       {celebrities.map((celeb, idx) => (
         <SignatureCard
           key={idx}
