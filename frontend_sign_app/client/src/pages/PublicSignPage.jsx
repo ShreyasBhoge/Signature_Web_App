@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import "../pdfWorker";
-
 import { Document, Page, pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -57,16 +56,16 @@ const PublicSignPage = () => {
   if (signed) {
     return (
       <motion.div
-        className="text-center mt-20"
+        className="text-center mt-20 px-4"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
       >
-        <h2 className="text-3xl font-bold text-green-600 mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
           ✅ Document Signed Successfully!
         </h2>
         <motion.button
           whileHover={{ scale: 1.05 }}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition text-sm sm:text-base"
           onClick={() => (window.location.href = "/")}
         >
           Return Home
@@ -76,19 +75,19 @@ const PublicSignPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center p-8 bg-gray-50 min-h-screen">
+    <div className="flex flex-col items-center p-4 sm:p-8 bg-gray-50 min-h-screen">
       <motion.h1
-        className="text-3xl font-bold mb-6 text-blue-700"
+        className="text-2xl sm:text-3xl font-bold mb-6 text-blue-700 text-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >
         Sign This Document
       </motion.h1>
 
-      {/* PDF + Draggable Signature */}
+      {/* PDF Preview */}
       <motion.div
         ref={pdfWrapperRef}
-        className="relative border shadow-xl rounded-lg overflow-auto max-w-[850px] max-h-[700px] bg-white"
+        className="relative border shadow-xl rounded-lg overflow-auto bg-white w-full max-w-full sm:max-w-[850px] max-h-[70vh]"
         whileHover={{ scale: 1.01 }}
         transition={{ type: "spring", stiffness: 200 }}
       >
@@ -97,18 +96,22 @@ const PublicSignPage = () => {
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
         >
           {Array.from(new Array(numPages), (_, index) => (
-            <Page key={`page_${index + 1}`} pageNumber={index + 1} width={800} />
+            <Page
+              key={`page_${index + 1}`}
+              pageNumber={index + 1}
+              width={Math.min(window.innerWidth - 40, 800)}
+            />
           ))}
         </Document>
 
-        {/* 🖋️ Draggable Signature */}
+        {/* 🖋️ Signature */}
         <motion.div
           drag
           dragConstraints={pdfWrapperRef}
           className="absolute px-3 py-1 text-black bg-white rounded border border-blue-400 cursor-move shadow-md"
           style={{
             fontFamily: font,
-            fontSize: "22px",
+            fontSize: "20px",
             top: coords.y,
             left: coords.x,
           }}
@@ -126,9 +129,9 @@ const PublicSignPage = () => {
         </motion.div>
       </motion.div>
 
-      {/* Signature Input + Font Preview */}
+      {/* Controls */}
       <motion.div
-        className="flex flex-col items-center gap-4 w-full max-w-md mt-6"
+        className="flex flex-col items-center gap-4 w-full max-w-md mt-6 px-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -153,8 +156,8 @@ const PublicSignPage = () => {
         </select>
 
         <motion.div
-          className="text-center py-2 px-4 rounded bg-blue-50 w-full border"
-          style={{ fontFamily: font, fontSize: "22px" }}
+          className="text-center py-2 px-4 rounded bg-blue-50 w-full border text-lg"
+          style={{ fontFamily: font }}
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
@@ -163,7 +166,7 @@ const PublicSignPage = () => {
 
         <motion.button
           onClick={handleFinalize}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:shadow-xl transition hover:bg-blue-700"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:shadow-xl transition hover:bg-blue-700 w-full text-center"
           whileHover={{ scale: 1.05, rotate: 1 }}
           whileTap={{ scale: 0.95 }}
         >
