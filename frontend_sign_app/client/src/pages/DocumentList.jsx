@@ -1,3 +1,4 @@
+// No change in imports
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -122,8 +123,8 @@ const DocumentList = () => {
         setFilterStatus={setFilterStatus}
       />
 
-      <div className="p-4 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-8 text-center text-blue-700">
+      <div className="p-4 sm:p-6 max-w-5xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-blue-700">
           Upload Document
         </h2>
 
@@ -131,7 +132,7 @@ const DocumentList = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           whileHover={{ scale: 1.05 }}
-          className={`mx-auto max-w-md bg-white rounded-full p-8 border-4 border-dotted transition-all duration-300 mb-10 cursor-pointer relative overflow-hidden group text-center ${
+          className={`mx-auto w-full max-w-md bg-white rounded-full p-6 sm:p-8 border-4 border-dotted transition-all duration-300 mb-10 cursor-pointer relative overflow-hidden group text-center ${
             uploading ? "animate-pulse" : ""
           }`}
           style={{
@@ -141,7 +142,7 @@ const DocumentList = () => {
           }}
           onClick={() => document.getElementById("pdfUpload").click()}
         >
-          <p className="text-lg font-medium text-gray-700">
+          <p className="text-base sm:text-lg font-medium text-gray-700">
             {uploading ? "Uploading..." : "📎 Click or drag a PDF file to upload"}
           </p>
           <input
@@ -169,11 +170,11 @@ const DocumentList = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="bg-white w-full max-w-xl mx-auto min-h-[180px] rounded-xl shadow-md border border-gray-200 p-8 transition-all duration-300 group hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-blue-400 relative"
+                    className="bg-white w-full max-w-xl mx-auto min-h-[180px] rounded-xl shadow-md border border-gray-200 p-6 sm:p-8 transition-all duration-300 group hover:scale-[1.02] hover:shadow-xl hover:ring-2 hover:ring-blue-400"
                   >
                     <div className="mb-4">
                       <h4
-                        className="font-semibold truncate text-lg text-gray-800"
+                        className="font-semibold truncate text-base sm:text-lg text-gray-800"
                         title={doc.originalname}
                       >
                         {doc.originalname}
@@ -181,7 +182,7 @@ const DocumentList = () => {
                       <p className="text-sm text-gray-500">
                         Uploaded on {new Date(doc.uploadedAt).toLocaleString()}
                       </p>
-                      <p className="text-sm mt-1 flex items-center gap-2">
+                      <p className="text-sm mt-1 flex flex-wrap items-center gap-2">
                         <span className="font-semibold">Status:</span>
                         <span
                           className={`px-2 py-1 rounded-md text-xs font-medium ${getStatusColor(
@@ -197,10 +198,11 @@ const DocumentList = () => {
                         )}
                       </p>
                     </div>
+
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out mt-4 flex flex-wrap justify-center gap-2 pointer-events-none group-hover:pointer-events-auto">
                       <Link
                         to={`/preview/${doc.filename}`}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
+                        className="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition"
                       >
                         View
                       </Link>
@@ -208,19 +210,19 @@ const DocumentList = () => {
                         href={`${API_BASE}/uploads/signed-${doc.filename}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
+                        className="w-full sm:w-auto text-center bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition"
                       >
                         Download
                       </a>
                       <button
                         onClick={() => handleCopyLink(doc.filename)}
-                        className="bg-gray-700 hover:bg-gray-800 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
+                        className="w-full sm:w-auto text-center bg-gray-700 hover:bg-gray-800 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition"
                       >
                         Copy
                       </button>
                       <button
                         onClick={() => handleDelete(doc._id)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition duration-200"
+                        className="w-full sm:w-auto text-center bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm shadow-sm transition"
                       >
                         Delete
                       </button>
